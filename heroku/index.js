@@ -9,7 +9,7 @@
 var request = require("request");
 var bodyParser = require('body-parser');
 var express = require('express');
-var app = express().use(body_parser.json());
+var app = express().use(bodyParser.json());
 var xhub = require('express-x-hub');
 var axios = require("axios").default;
 
