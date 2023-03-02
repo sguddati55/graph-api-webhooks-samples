@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/fbsamples/graph-api-webhooks-samples"
+    "url": "https://github.com/dnayyar/graph-api-webhooks-samples"
   },
   "keywords": [
     "node",
@@ -24,6 +24,6 @@
     "express",
     "graph api"
   ],
-  "license": "https://github.com/fbsamples/graph-api-webhooks-samples/blob/master/LICENSE",
-  "bugs": "https://github.com/fbsamples/graph-api-webhooks-samples/issues"
+  "license": "https://github.com/dnayyar/graph-api-webhooks-samples/blob/master/LICENSE",
+  "bugs": "https://github.com/dnayyar/graph-api-webhooks-samples/issues"
 }
