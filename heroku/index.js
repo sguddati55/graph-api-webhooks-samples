@@ -10,6 +10,8 @@ var bodyParser = require('body-parser');
 var express = require('express');
 var app = express();
 var xhub = require('express-x-hub');
+var axios = require("axios").default;
+
 
 app.set('port', (process.env.PORT || 5000));
 app.listen(app.get('port'));
@@ -18,6 +20,8 @@ app.use(xhub({ algorithm: 'sha1', secret: process.env.APP_SECRET }));
 app.use(bodyParser.json());
 
 var token = process.env.TOKEN || 'token';
+var whatsapp_accesstoken = process.env.WHATSAPP_ACCESSTOKEN || '';
+
 var received_updates = [];
 
 app.get('/', function(req, res) {
@@ -25,7 +29,7 @@ app.get('/', function(req, res) {
   res.send('<pre>' + JSON.stringify(received_updates, null, 2) + '</pre>');
 });
 
-app.get(['/facebook', '/instagram'], function(req, res) {
+app.get(['/facebook', '/instagram', '/webhook'], function(req, res) {
   if (
     req.query['hub.mode'] == 'subscribe' &&
     req.query['hub.verify_token'] == token
@@ -57,6 +61,51 @@ app.post('/instagram', function(req, res) {
   // Process the Instagram updates here
   received_updates.unshift(req.body);
   res.sendStatus(200);
+});
+
+// Accepts POST requests at /webhook endpoint
+app.post('/webhook', function(req, res) {
+  console.log('Whatsapp request body:');
+  console.log(req.body);
+  // Parse the request body from the POST
+  let body = req.body;
+
+  // Check the Incoming webhook message
+  console.log(JSON.stringify(req.body, null, 2));
+
+  // info on WhatsApp text message payload: https://developers.facebook.com/docs/whatsapp/cloud-api/webhooks/payload-examples#text-messages
+  if (req.body.object) {
+    if (
+      req.body.entry &&
+      req.body.entry[0].changes &&
+      req.body.entry[0].changes[0] &&
+      req.body.entry[0].changes[0].value.messages &&
+      req.body.entry[0].changes[0].value.messages[0]
+    ) {
+      let phone_number_id =
+        req.body.entry[0].changes[0].value.metadata.phone_number_id;
+      let from = req.body.entry[0].changes[0].value.messages[0].from; // extract the phone number from the webhook payload
+      let msg_body = req.body.entry[0].changes[0].value.messages[0].text.body; // extract the message text from the webhook payload
+      axios({
+        method: "POST", // Required, HTTP method, a string, e.g. POST, GET
+        url:
+          "https://graph.facebook.com/v12.0/" +
+          phone_number_id +
+          "/messages?access_token=" +
+          whatsapp_accesstoken,
+        data: {
+          messaging_product: "whatsapp",
+          to: from,
+          text: { body: "Ack: " + msg_body },
+        },
+        headers: { "Content-Type": "application/json" },
+      });
+    }
+    res.sendStatus(200);
+  } else {
+    // Return a '404 Not Found' if event is not from a WhatsApp API
+    res.sendStatus(404);
+  }
 });
 
 app.listen();
