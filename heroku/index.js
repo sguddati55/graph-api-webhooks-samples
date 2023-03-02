@@ -66,13 +66,15 @@ app.post('/instagram', function(req, res) {
 
 // Accepts POST requests at /webhook endpoint
 app.post('/webhook', function(req, res) {
-  console.log('Whatsapp request body:');
-  console.log(req.body);
   // Parse the request body from the POST
   let body = req.body;
+  
+  console.log('Logging Whatsapp request body: ');
+  console.log(body);
 
   // Check the Incoming webhook message
-  console.log(JSON.stringify(req.body, null, 2));
+  console.log('Logging request body in json string: ');
+  console.log(JSON.stringify(body, null, 2));
 
   // info on WhatsApp text message payload: https://developers.facebook.com/docs/whatsapp/cloud-api/webhooks/payload-examples#text-messages
   if (req.body.object) {
