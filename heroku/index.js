@@ -6,9 +6,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+var request = require("request");
 var bodyParser = require('body-parser');
 var express = require('express');
-var app = express();
+var app = express().use(body_parser.json());
 var xhub = require('express-x-hub');
 var axios = require("axios").default;
 
