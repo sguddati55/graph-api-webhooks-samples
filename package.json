@@ -26,8 +26,7 @@
     "node",
     "heroku",
     "express",
-    "graph api",
-    'axios"
+    "graph api"
   ],
   "license": "https://github.com/dnayyar/graph-api-webhooks-samples/blob/master/LICENSE",
   "bugs": "https://github.com/dnayyar/graph-api-webhooks-samples/issues"
