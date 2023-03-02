@@ -88,8 +88,11 @@ app.post('/webhook', function(req, res) {
       let from = req.body.entry[0].changes[0].value.messages[0].from; // extract the phone number from the webhook payload
       let msg_body = req.body.entry[0].changes[0].value.messages[0].text.body; // extract the message text from the webhook payload
       
-      let reply = "sending another message";
-      if(msg_body == "hi" || msg_body == "hello"){
+      let reply = "sending test message";
+      
+      if(msg_body.includes("optin")){
+        reply = "Yes";
+      } else if(msg_body == "hi" || msg_body == "hello"){
         reply = "hi, how are you agent?";
       } else if (msg_body == "how can I help?") {
         reply = "I need help with my internet account";
@@ -97,6 +100,9 @@ app.post('/webhook', function(req, res) {
         reply = "Wifi connection is down";
       } else if (msg_body == "bye") {
         reply = "bbye";
+      } else if (msg_body.includes("Conversation") || msg_body.includes("opted")) {
+        res.sendStatus(200);
+        return;
       }
       
       axios({
