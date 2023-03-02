@@ -87,6 +87,18 @@ app.post('/webhook', function(req, res) {
         req.body.entry[0].changes[0].value.metadata.phone_number_id;
       let from = req.body.entry[0].changes[0].value.messages[0].from; // extract the phone number from the webhook payload
       let msg_body = req.body.entry[0].changes[0].value.messages[0].text.body; // extract the message text from the webhook payload
+      
+      let reply = "sending another message";
+      if(msg_body = "hi" || msg_body = "hello"){
+        reply = "hi, how are you agent?";
+      } else if (msg_body == "how can I help?") {
+        reply = "I need help with my internet account";
+      } else if (msg_body == "sure. what is the problem?") {
+        reply = "Wifi connection is down";
+      }else if (msg_body == "bye") {
+        reply = "bbye";
+      }
+      
       axios({
         method: "POST", // Required, HTTP method, a string, e.g. POST, GET
         url:
