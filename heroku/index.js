@@ -97,7 +97,7 @@ app.post('/webhook', function(req, res) {
       } else if(msg_body == "hi" || msg_body == "hello"){
         reply = "hi, how are you agent?";
       } else if (msg_body == "how can I help?") {
-        reply = "I need help with my internet account";
+        reply = "Ack: " + msg_body;
       } else if (msg_body == "sure. what is the problem?") {
         reply = "Wifi connection is down";
       } else if (msg_body == "bye") {
