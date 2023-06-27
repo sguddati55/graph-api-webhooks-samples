@@ -92,7 +92,7 @@ app.post('/webhook', function(req, res) {
       
       let reply = "sending test message";
       
-      if(msg_body.includes("Welcome")){
+      if(msg_body.includes("optin")){
         reply = "Yes";
       } else if(msg_body == "hi" || msg_body == "hello"){
         reply = "hi, how are you agent?";
