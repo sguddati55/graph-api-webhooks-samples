@@ -95,7 +95,7 @@ app.post('/webhook', function(req, res) {
       if(msg_body.includes("Optin")){
         reply = "Yes";
       } else if(msg_body == "hi" || msg_body == "hello"){
-        reply = "hi, how are you agent?";
+        reply = "stop";
       } else if (msg_body == "how can I help?") {
         reply = "Ack: " + msg_body;
       } else if (msg_body == "sure. what is the problem?") {
