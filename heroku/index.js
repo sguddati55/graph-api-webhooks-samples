@@ -94,7 +94,7 @@ app.post('/webhook', function(req, res) {
       
       if(msg_body.includes("Optin")){
         reply = "Yes";
-      } else if(msg_body == "hi" || msg_body == "hello" || msg_body == "End Chat"){
+      } else if(msg_body == "hi" || msg_body == "hello" || msg_body.includes("End Chat")){
         reply = "stop";
       } else if (msg_body == "Thanks for Opting in. How can I help you with ?") {
         reply = "Acknowledged agent message with : " + msg_body;
