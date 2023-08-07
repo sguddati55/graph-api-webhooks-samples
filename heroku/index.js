@@ -96,7 +96,7 @@ app.post('/webhook', function(req, res) {
         reply = "Yes";
       } else if(msg_body == "hi" || msg_body == "hello" || msg_body.includes("End Chat")){
         reply = "stop";
-      } else if (msg_body == "Thanks for gettind Opted in. How can I help you with ?") {
+      } else if (msg_body == "Thanks for opting in and allowing us to send you messages. How can I help you with ?") {
         reply = "Acknowledged agent message with : " + msg_body;
       } else if (msg_body == "sure. what is the problem?") {
         reply = "Wifi connection is down";
