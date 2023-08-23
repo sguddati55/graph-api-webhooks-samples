@@ -97,7 +97,7 @@ app.post('/webhook', function(req, res) {
       } else if(msg_body == "hi" || msg_body == "hello" || msg_body.includes("End Chat")){
         reply = "stop";
       } else if (msg_body == "Thanks for opting in and allowing us to send you messages. How can I help you with ?") {
-        reply = "Can you please help in fixing my laptop connection issue? ";
+        res.sendStatus(200);
       } else if (msg_body == "Thanks for reaching out !! How can I help you with ?") {
         reply = "Can you please help in fixing my laptop connection issue? "";
       } else if (msg_body == "bye") {
