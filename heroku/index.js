@@ -98,6 +98,8 @@ app.post('/webhook', function(req, res) {
         reply = "stop";
       } else if (msg_body == "Thanks for opting in and allowing us to send you messages. How can I help you with ?") {
         reply = "Can you please help in fixing my laptop connection issue?";
+      } else if (msg_body == "Hi, I'm an AI service assistant. How can I help you?") {
+        reply = "I want to speak with an agent.";
       } else if (msg_body == "Thanks for reaching out !! How can I help you with ?") {
         reply = "Can you please help in fixing my laptop connection issue?";
       } else if (msg_body == "bye") {
